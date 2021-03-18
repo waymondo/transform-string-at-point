@@ -5,7 +5,7 @@
 ;; Author: Justin Talbott
 ;; URL: https://github.com/waymondo/transform-string-at-point
 ;; Version: 0.0.1
-;; Package-Requires: ((emacs "24") (s "0.4.0") (which-key "3.5.1"))
+;; Package-Requires: ((emacs "24") (s "1.12.0") (which-key "3.5.1"))
 ;; License: GNU General Public License version 3, or (at your option) any later version
 ;; Keywords: convenience, tools
 
@@ -93,12 +93,12 @@
 ;;;###autoload
 (defun transform-string-at-point-downcase ()
   (interactive)
-  (transform-string-at-point--i #'s-downcase))
+  (transform-string-at-point--internal #'s-downcase))
 
 ;;;###autoload
 (defun transform-string-at-point-upcase ()
   (interactive)
-  (transform-string-at-point--i #'s-upcase))
+  (transform-string-at-point--internal #'s-upcase))
 
 (defvar transform-string-at-point-map
   (let ((map (make-sparse-keymap)))

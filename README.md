@@ -17,6 +17,8 @@ Each of the transformation commands can be called interactively as well:
 * `transform-string-at-point-snake-case`
 * `transform-string-at-point-dashed-words`
 * `transform-string-at-point-downcase`
+* `transform-string-at-point-capitalized-words`
+* `transform-string-at-point-titleized-words`
 * `transform-string-at-point-upcase`
 
 To customize where the cursor ends up after transformation, set

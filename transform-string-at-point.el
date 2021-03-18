@@ -37,6 +37,8 @@
 ;; * `transform-string-at-point-snake-case'
 ;; * `transform-string-at-point-dashed-words'
 ;; * `transform-string-at-point-downcase'
+;; * `transform-string-at-point-capitalized-words'
+;; * `transform-string-at-point-titleized-words'
 ;; * `transform-string-at-point-upcase'
 
 ;; To customize where the cursor ends up after transformation,
@@ -101,6 +103,16 @@
   (transform-string-at-point--internal #'s-downcase))
 
 ;;;###autoload
+(defun transform-string-at-point-capitalized-words ()
+  (interactive)
+  (transform-string-at-point--internal #'s-capitalized-words))
+
+;;;###autoload
+(defun transform-string-at-point-titleized-words ()
+  (interactive)
+  (transform-string-at-point--internal #'s-titleized-words))
+
+;;;###autoload
 (defun transform-string-at-point-upcase ()
   (interactive)
   (transform-string-at-point--internal #'s-upcase))
@@ -112,7 +124,9 @@
     (define-key map (kbd "_") 'transform-string-at-point-snake-case)
     (define-key map (kbd "-") 'transform-string-at-point-dashed-words)
     (define-key map (kbd "d") 'transform-string-at-point-downcase)
-    (define-key map (kbd "u") 'transform-string-at-point-upcase)
+    (define-key map (kbd "u") 'transform-string-at-point-capitalized-words)
+    (define-key map (kbd "t") 'transform-string-at-point-titleized-words)
+    (define-key map (kbd "U") 'transform-string-at-point-upcase)
     map)
   "Keymap for `transform-string-at-point'.")
 
@@ -124,7 +138,9 @@
   "_" '("snakecase" . transform-string-at-point-snake-case)
   "-" '("dasherize" . transform-string-at-point-dashed-words)
   "d" '("downcase" . transform-string-at-point-downcase)
-  "u" '("upcase" . transform-string-at-point-upcase))
+  "u" '("capitalize" . transform-string-at-point-capitalized-words)
+  "t" '("titleize" . transform-string-at-point-titleized-words)
+  "U" '("upcase" . transform-string-at-point-upcase))
 
 (provide 'transform-string-at-point)
 ;;; transform-string-at-point.el ends here

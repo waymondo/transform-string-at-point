@@ -111,7 +111,6 @@
     map)
   "Keymap for `transform-string-at-point'.")
 
-;;;###autoload
 (fset 'transform-string-at-point-map transform-string-at-point-map)
 
 (which-key-add-keymap-based-replacements transform-string-at-point-map

@@ -2,11 +2,10 @@
 
  Easily change the string at point between camelcasing, snakecasing, dasherized and more.
 
-Bind `transform-string-at-point-map` to the keybinding of your preference, for example:
-
+Bind `transform-string-at-point` to the keybinding of your preference, for example:
 
 ``` emacs-lisp
-(global-set-key (kbd "s-;") 'transform-string-at-point-map)
+(global-set-key (kbd "s-;") 'transform-string-at-point)
 ```
 
 Each of the transformation commands can be called interactively as well:

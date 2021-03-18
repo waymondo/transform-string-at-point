@@ -26,9 +26,9 @@
 
 ;; Easily change the string at point between camelcasing, snakecasing, dasherized and more.
 
-;; Bind `transform-string-at-point-map' to the keybinding of your preference, for example:
+;; Bind `transform-string-at-point' to the keybinding of your preference, for example:
 
-;; (global-set-key (kbd "s-;") 'transform-string-at-point-map)
+;; (global-set-key (kbd "s-;") 'transform-string-at-point)
 
 ;; Each of the transformation commands can be called interactively as well:
 
@@ -50,6 +50,11 @@
 
 (require 's)
 (require 'which-key)
+
+(defgroup transform-string-at-point nil
+  "Transforming the string at point customizations"
+  :group 'convenience
+  :prefix "transform-string-at-point-")
 
 (defcustom transform-string-at-point-cursor-after-transform 'string-end
   "Determines where the cursor should be after a successful transformation"
@@ -112,6 +117,12 @@
   "Keymap for `transform-string-at-point'.")
 
 (fset 'transform-string-at-point-map transform-string-at-point-map)
+
+;;;###autoload
+(defun transform-string-at-point ()
+  "Transform the current string at point"
+  (interactive)
+  (transform-string-at-point-map))
 
 (which-key-add-keymap-based-replacements transform-string-at-point-map
   "c" '("lower camelcase" . transform-string-at-point-lower-camel-case)

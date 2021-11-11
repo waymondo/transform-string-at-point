@@ -1,14 +1,22 @@
 ### Transform String At Point
 
- Easily change the string at point between camelcasing, snakecasing, dasherized and more.
+Easily change the string at point between camelcasing, snakecasing, dasherized and more.
 
-Bind `transform-string-at-point-map` to the keybinding of your preference, for example:
+Bind `transform-string-at-point` to the keybinding of your preference, for example:
+
+``` emacs-lisp
+(global-set-key (kbd "s-;") 'transform-string-at-point)
+```
+
+This will present a [`transient`](https://github.com/magit/transient) menu of the available
+commands, which are 1 keypress away.
+
+If you would prefer to use `which-key` instead of the default `transient` support, make sure
+`which-key` is installed and bind `transform-string-at-point-map` instead:
 
 ``` emacs-lisp
 (global-set-key (kbd "s-;") 'transform-string-at-point-map)
 ```
-
-Works best with [`which-key`](https://github.com/justbur/emacs-which-key).
 
 Each of the transformation commands can be called interactively as well:
 
@@ -36,6 +44,6 @@ Example installation with `use-package` and `straight.el`:
   (:host github :repo "waymondo/transform-string-at-point")
   :custom
   (transform-string-at-point-cursor-after-transform 'next-string)
-  :bind-keymap
-  ("s-;" . transform-string-at-point-map))
+  :bind
+  ("s-;" . transform-string-at-point))
 ```

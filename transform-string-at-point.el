@@ -4,8 +4,8 @@
 
 ;; Author: Justin Talbott
 ;; URL: https://github.com/waymondo/transform-string-at-point
-;; Version: 0.0.1
-;; Package-Requires: ((emacs "24") (s "1.12.0") (which-key "3.5.1"))
+;; Version: 0.0.2
+;; Package-Requires: ((emacs "24") (s "1.12.0") (transient "0.3.7"))
 ;; License: GNU General Public License version 3, or (at your option) any later version
 ;; Keywords: convenience, tools
 
@@ -26,7 +26,12 @@
 
 ;; Easily change the string at point between camelcasing, snakecasing, dasherized and more.
 
-;; Bind `transform-string-at-point-map' to the keybinding of your preference, for example:
+;; Bind `transform-string-at-point' to the keybinding of your preference, for example:
+
+;; (global-set-key (kbd "s-;") 'transform-string-at-point)
+
+;; If you would prefer to use `which-key' instead of the default `transient' support, make sure
+;; `which-key' is installed and bind `transform-string-at-point-map' instead:
 
 ;; (global-set-key (kbd "s-;") 'transform-string-at-point-map)
 
@@ -51,7 +56,7 @@
 ;;; Code:
 
 (require 's)
-(require 'which-key)
+(require 'transient)
 
 (defgroup transform-string-at-point nil
   "Transforming the string at point customizations"
@@ -132,15 +137,30 @@
 
 (fset 'transform-string-at-point-map transform-string-at-point-map)
 
-(which-key-add-keymap-based-replacements transform-string-at-point-map
-  "c" '("lower camelcase" . transform-string-at-point-lower-camel-case)
-  "C" '("upper camelcase" . transform-string-at-point-upper-camel-case)
-  "_" '("snakecase" . transform-string-at-point-snake-case)
-  "-" '("dasherize" . transform-string-at-point-dashed-words)
-  "d" '("downcase" . transform-string-at-point-downcase)
-  "u" '("capitalize" . transform-string-at-point-capitalized-words)
-  "t" '("titleize" . transform-string-at-point-titleized-words)
-  "U" '("upcase" . transform-string-at-point-upcase))
+(transient-define-prefix transform-string-at-point ()
+  "Transient menu for transforming string at point"
+  [
+   "Transform String At Point"
+   ("c" "lower camelcase" transform-string-at-point-lower-camel-case)
+   ("C" "upper camelcase" transform-string-at-point-upper-camel-case)
+   ("_" "snakecase" transform-string-at-point-snake-case)
+   ("-" "dasherize" transform-string-at-point-dashed-words)
+   ("d" "downcase" transform-string-at-point-downcase)
+   ("u" "capitalize" transform-string-at-point-capitalized-words)
+   ("t" "titleize" transform-string-at-point-titleized-words)
+   ("U" "upcase" transform-string-at-point-upcase)])
+
+
+(when (require 'which-key nil t)
+  (which-key-add-keymap-based-replacements transform-string-at-point-map
+    "c" '("lower camelcase" . transform-string-at-point-lower-camel-case)
+    "C" '("upper camelcase" . transform-string-at-point-upper-camel-case)
+    "_" '("snakecase" . transform-string-at-point-snake-case)
+    "-" '("dasherize" . transform-string-at-point-dashed-words)
+    "d" '("downcase" . transform-string-at-point-downcase)
+    "u" '("capitalize" . transform-string-at-point-capitalized-words)
+    "t" '("titleize" . transform-string-at-point-titleized-words)
+    "U" '("upcase" . transform-string-at-point-upcase)))
 
 (provide 'transform-string-at-point)
 ;;; transform-string-at-point.el ends here
